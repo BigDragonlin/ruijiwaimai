@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/ruiji?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: root
+
+mybatis-plus:
+  configuration:
+#    在映射实体或者属性的时候，把下划线写法变成驼峰写法
+    map-underscore-to-camel-case: true
+    #??
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #??
+  global-config:
+    db-config:
+      id-type: auto
