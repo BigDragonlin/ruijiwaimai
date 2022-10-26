@@ -1,165 +1,114 @@
 package com.furuitakeout.domain;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Length;
+import lombok.Data;
 
 /**
-* 用户信息
-* @TableName user
-*/
+ * 用户信息
+ * @TableName user
+ */
+@TableName(value ="user")
+@Data
 public class User implements Serializable {
+    /**
+     * 主键
+     */
+    @TableId(value = "id")
+    private Long id;
 
     /**
-    * 主键
-    */
-    @NotNull(message="[主键]不能为空")
-    @ApiModelProperty("主键")
-    private Long id;
-    /**
-    * 姓名
-    */
-    @Size(max= 50,message="编码长度不能超过50")
-    @ApiModelProperty("姓名")
-    @Length(max= 50,message="编码长度不能超过50")
+     * 姓名
+     */
+    @TableField(value = "name")
     private String name;
+
     /**
-    * 手机号
-    */
-    @NotBlank(message="[手机号]不能为空")
-    @Size(max= 100,message="编码长度不能超过100")
-    @ApiModelProperty("手机号")
-    @Length(max= 100,message="编码长度不能超过100")
+     * 手机号
+     */
+    @TableField(value = "phone")
     private String phone;
+
     /**
-    * 性别
-    */
-    @Size(max= 2,message="编码长度不能超过2")
-    @ApiModelProperty("性别")
-    @Length(max= 2,message="编码长度不能超过2")
+     * 性别
+     */
+    @TableField(value = "sex")
     private String sex;
+
     /**
-    * 身份证号
-    */
-    @Size(max= 18,message="编码长度不能超过18")
-    @ApiModelProperty("身份证号")
-    @Length(max= 18,message="编码长度不能超过18")
-    private String idNumber;
+     * 身份证号
+     */
+    @TableField(value = "id_number")
+    private String id_number;
+
     /**
-    * 头像
-    */
-    @Size(max= 500,message="编码长度不能超过500")
-    @ApiModelProperty("头像")
-    @Length(max= 500,message="编码长度不能超过500")
+     * 头像
+     */
+    @TableField(value = "avatar")
     private String avatar;
+
     /**
-    * 状态 0:禁用，1:正常
-    */
-    @ApiModelProperty("状态 0:禁用，1:正常")
+     * 状态 0:禁用，1:正常
+     */
+    @TableField(value = "status")
     private Integer status;
 
-    /**
-    * 主键
-    */
-    private void setId(Long id){
-    this.id = id;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        User other = (User) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+            && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
+            && (this.getId_number() == null ? other.getId_number() == null : this.getId_number().equals(other.getId_number()))
+            && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
     }
 
-    /**
-    * 姓名
-    */
-    private void setName(String name){
-    this.name = name;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
+        result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
+        result = prime * result + ((getId_number() == null) ? 0 : getId_number().hashCode());
+        result = prime * result + ((getAvatar() == null) ? 0 : getAvatar().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        return result;
     }
 
-    /**
-    * 手机号
-    */
-    private void setPhone(String phone){
-    this.phone = phone;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", phone=").append(phone);
+        sb.append(", sex=").append(sex);
+        sb.append(", id_number=").append(id_number);
+        sb.append(", avatar=").append(avatar);
+        sb.append(", status=").append(status);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
-
-    /**
-    * 性别
-    */
-    private void setSex(String sex){
-    this.sex = sex;
-    }
-
-    /**
-    * 身份证号
-    */
-    private void setIdNumber(String idNumber){
-    this.idNumber = idNumber;
-    }
-
-    /**
-    * 头像
-    */
-    private void setAvatar(String avatar){
-    this.avatar = avatar;
-    }
-
-    /**
-    * 状态 0:禁用，1:正常
-    */
-    private void setStatus(Integer status){
-    this.status = status;
-    }
-
-
-    /**
-    * 主键
-    */
-    private Long getId(){
-    return this.id;
-    }
-
-    /**
-    * 姓名
-    */
-    private String getName(){
-    return this.name;
-    }
-
-    /**
-    * 手机号
-    */
-    private String getPhone(){
-    return this.phone;
-    }
-
-    /**
-    * 性别
-    */
-    private String getSex(){
-    return this.sex;
-    }
-
-    /**
-    * 身份证号
-    */
-    private String getIdNumber(){
-    return this.idNumber;
-    }
-
-    /**
-    * 头像
-    */
-    private String getAvatar(){
-    return this.avatar;
-    }
-
-    /**
-    * 状态 0:禁用，1:正常
-    */
-    private Integer getStatus(){
-    return this.status;
-    }
-
 }

@@ -1,5 +1,6 @@
 package com.furuitakeout.service;
 
+import com.furuitakeout.domain.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

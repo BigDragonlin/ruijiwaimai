@@ -1,182 +1,130 @@
 package com.furuitakeout.domain;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
-
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 /**
-* 菜品及套餐分类
-* @TableName category
-*/
+ * 菜品及套餐分类
+ * @TableName category
+ */
+@TableName(value ="category")
+@Data
 public class Category implements Serializable {
-
     /**
-    * 主键
-    */
-    @NotNull(message="[主键]不能为空")
-    @ApiModelProperty("主键")
+     * 主键
+     * 使用jackson 将long输出成string，这样js就不会又精度损失了
+     *另
+     * @JsonSerialize(using = ToStringSerializer.class)
+     */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
+
     /**
-    * 类型   1 菜品分类 2 套餐分类
-    */
-    @ApiModelProperty("类型   1 菜品分类 2 套餐分类")
+     * 类型   1 菜品分类 2 套餐分类
+     */
+    @TableField(value = "type")
     private Integer type;
+
     /**
-    * 分类名称
-    */
-    @NotBlank(message="[分类名称]不能为空")
-    @Size(max= 64,message="编码长度不能超过64")
-    @ApiModelProperty("分类名称")
-    @Length(max= 64,message="编码长度不能超过64")
+     * 分类名称
+     */
+    @TableField(value = "name")
     private String name;
+
     /**
-    * 顺序
-    */
-    @NotNull(message="[顺序]不能为空")
-    @ApiModelProperty("顺序")
+     * 顺序
+     */
+    @TableField(value = "sort")
     private Integer sort;
-    /**
-    * 创建时间
-    */
-    @NotNull(message="[创建时间]不能为空")
-    @ApiModelProperty("创建时间")
-    private LocalDateTime createTime;
-    /**
-    * 更新时间
-    */
-    @NotNull(message="[更新时间]不能为空")
-    @ApiModelProperty("更新时间")
-    private LocalDateTime updateTime;
-    /**
-    * 创建人
-    */
-    @NotNull(message="[创建人]不能为空")
-    @ApiModelProperty("创建人")
-    private Long createUser;
-    /**
-    * 修改人
-    */
-    @NotNull(message="[修改人]不能为空")
-    @ApiModelProperty("修改人")
-    private Long updateUser;
 
     /**
-    * 主键
-    */
-    private void setId(Long id){
-    this.id = id;
+     * 创建时间
+     */
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    private LocalDateTime create_time;
+
+    /**
+     * 更新时间
+     */
+    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime update_time;
+
+    /**
+     * 创建人
+     */
+    @TableField(value = "create_user")
+    private Long create_user;
+
+    /**
+     * 修改人
+     */
+    @TableField(value = "update_user")
+    private Long update_user;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Category other = (Category) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getSort() == null ? other.getSort() == null : this.getSort().equals(other.getSort()))
+            && (this.getCreate_time() == null ? other.getCreate_time() == null : this.getCreate_time().equals(other.getCreate_time()))
+            && (this.getUpdate_time() == null ? other.getUpdate_time() == null : this.getUpdate_time().equals(other.getUpdate_time()))
+            && (this.getCreate_user() == null ? other.getCreate_user() == null : this.getCreate_user().equals(other.getCreate_user()))
+            && (this.getUpdate_user() == null ? other.getUpdate_user() == null : this.getUpdate_user().equals(other.getUpdate_user()));
     }
 
-    /**
-    * 类型   1 菜品分类 2 套餐分类
-    */
-    private void setType(Integer type){
-    this.type = type;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getSort() == null) ? 0 : getSort().hashCode());
+        result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
+        result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
+        result = prime * result + ((getCreate_user() == null) ? 0 : getCreate_user().hashCode());
+        result = prime * result + ((getUpdate_user() == null) ? 0 : getUpdate_user().hashCode());
+        return result;
     }
 
-    /**
-    * 分类名称
-    */
-    private void setName(String name){
-    this.name = name;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", type=").append(type);
+        sb.append(", name=").append(name);
+        sb.append(", sort=").append(sort);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", create_user=").append(create_user);
+        sb.append(", update_user=").append(update_user);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
-
-    /**
-    * 顺序
-    */
-    private void setSort(Integer sort){
-    this.sort = sort;
-    }
-
-    /**
-    * 创建时间
-    */
-    private void setCreateTime(LocalDateTime createTime){
-    this.createTime = createTime;
-    }
-
-    /**
-    * 更新时间
-    */
-    private void setUpdateTime(LocalDateTime updateTime){
-    this.updateTime = updateTime;
-    }
-
-    /**
-    * 创建人
-    */
-    private void setCreateUser(Long createUser){
-    this.createUser = createUser;
-    }
-
-    /**
-    * 修改人
-    */
-    private void setUpdateUser(Long updateUser){
-    this.updateUser = updateUser;
-    }
-
-
-    /**
-    * 主键
-    */
-    private Long getId(){
-    return this.id;
-    }
-
-    /**
-    * 类型   1 菜品分类 2 套餐分类
-    */
-    private Integer getType(){
-    return this.type;
-    }
-
-    /**
-    * 分类名称
-    */
-    private String getName(){
-    return this.name;
-    }
-
-    /**
-    * 顺序
-    */
-    private Integer getSort(){
-    return this.sort;
-    }
-
-    /**
-    * 创建时间
-    */
-    private LocalDateTime getCreateTime(){
-    return this.createTime;
-    }
-
-    /**
-    * 更新时间
-    */
-    private LocalDateTime getUpdateTime(){
-    return this.updateTime;
-    }
-
-    /**
-    * 创建人
-    */
-    private Long getCreateUser(){
-    return this.createUser;
-    }
-
-    /**
-    * 修改人
-    */
-    private Long getUpdateUser(){
-    return this.updateUser;
-    }
-
 }

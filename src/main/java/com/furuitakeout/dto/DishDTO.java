@@ -1,6 +1,8 @@
 package com.furuitakeout.dto;
 
 
+import com.furuitakeout.domain.Dish;
+import com.furuitakeout.domain.DishFlavor;
 import lombok.Data;
 
 import java.util.ArrayList;

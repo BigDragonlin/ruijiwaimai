@@ -1,308 +1,179 @@
 package com.furuitakeout.domain;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-
-import java.time.LocalDateTime;
 import java.math.BigDecimal;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Length;
+import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
-* 订单表
-* @TableName orders
-*/
+ * 订单表
+ * @TableName orders
+ */
+@TableName(value ="orders")
+@Data
 public class Orders implements Serializable {
+    /**
+     * 主键
+     */
+    @TableId(value = "id")
+    private Long id;
 
     /**
-    * 主键
-    */
-    @NotNull(message="[主键]不能为空")
-    @ApiModelProperty("主键")
-    private Long id;
-    /**
-    * 订单号
-    */
-    @Size(max= 50,message="编码长度不能超过50")
-    @ApiModelProperty("订单号")
-    @Length(max= 50,message="编码长度不能超过50")
+     * 订单号
+     */
+    @TableField(value = "number")
     private String number;
+
     /**
-    * 订单状态 1待付款，2待派送，3已派送，4已完成，5已取消
-    */
-    @NotNull(message="[订单状态 1待付款，2待派送，3已派送，4已完成，5已取消]不能为空")
-    @ApiModelProperty("订单状态 1待付款，2待派送，3已派送，4已完成，5已取消")
+     * 订单状态 1待付款，2待派送，3已派送，4已完成，5已取消
+     */
+    @TableField(value = "status")
     private Integer status;
+
     /**
-    * 下单用户
-    */
-    @NotNull(message="[下单用户]不能为空")
-    @ApiModelProperty("下单用户")
-    private Long userId;
+     * 下单用户
+     */
+    @TableField(value = "user_id")
+    private Long user_id;
+
     /**
-    * 地址id
-    */
-    @NotNull(message="[地址id]不能为空")
-    @ApiModelProperty("地址id")
-    private Long addressBookId;
+     * 地址id
+     */
+    @TableField(value = "address_book_id")
+    private Long address_book_id;
+
     /**
-    * 下单时间
-    */
-    @NotNull(message="[下单时间]不能为空")
-    @ApiModelProperty("下单时间")
-    private LocalDateTime orderTime;
+     * 下单时间
+     */
+    @TableField(value = "order_time")
+    private LocalDateTime order_time;
+
     /**
-    * 结账时间
-    */
-    @NotNull(message="[结账时间]不能为空")
-    @ApiModelProperty("结账时间")
-    private LocalDateTime checkoutTime;
+     * 结账时间
+     */
+    @TableField(value = "checkout_time")
+    private LocalDateTime checkout_time;
+
     /**
-    * 支付方式 1微信,2支付宝
-    */
-    @NotNull(message="[支付方式 1微信,2支付宝]不能为空")
-    @ApiModelProperty("支付方式 1微信,2支付宝")
-    private Integer payMethod;
+     * 支付方式 1微信,2支付宝
+     */
+    @TableField(value = "pay_method")
+    private Integer pay_method;
+
     /**
-    * 实收金额
-    */
-    @NotNull(message="[实收金额]不能为空")
-    @ApiModelProperty("实收金额")
+     * 实收金额
+     */
+    @TableField(value = "amount")
     private BigDecimal amount;
+
     /**
-    * 备注
-    */
-    @Size(max= 100,message="编码长度不能超过100")
-    @ApiModelProperty("备注")
-    @Length(max= 100,message="编码长度不能超过100")
+     * 备注
+     */
+    @TableField(value = "remark")
     private String remark;
+
     /**
-    * 
-    */
-    @Size(max= 255,message="编码长度不能超过255")
-    @ApiModelProperty("")
-    @Length(max= 255,message="编码长度不能超过255")
+     * 
+     */
+    @TableField(value = "phone")
     private String phone;
+
     /**
-    * 
-    */
-    @Size(max= 255,message="编码长度不能超过255")
-    @ApiModelProperty("")
-    @Length(max= 255,message="编码长度不能超过255")
+     * 
+     */
+    @TableField(value = "address")
     private String address;
+
     /**
-    * 
-    */
-    @Size(max= 255,message="编码长度不能超过255")
-    @ApiModelProperty("")
-    @Length(max= 255,message="编码长度不能超过255")
-    private String userName;
+     * 
+     */
+    @TableField(value = "user_name")
+    private String user_name;
+
     /**
-    * 
-    */
-    @Size(max= 255,message="编码长度不能超过255")
-    @ApiModelProperty("")
-    @Length(max= 255,message="编码长度不能超过255")
+     * 
+     */
+    @TableField(value = "consignee")
     private String consignee;
 
-    /**
-    * 主键
-    */
-    private void setId(Long id){
-    this.id = id;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Orders other = (Orders) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getNumber() == null ? other.getNumber() == null : this.getNumber().equals(other.getNumber()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getUser_id() == null ? other.getUser_id() == null : this.getUser_id().equals(other.getUser_id()))
+            && (this.getAddress_book_id() == null ? other.getAddress_book_id() == null : this.getAddress_book_id().equals(other.getAddress_book_id()))
+            && (this.getOrder_time() == null ? other.getOrder_time() == null : this.getOrder_time().equals(other.getOrder_time()))
+            && (this.getCheckout_time() == null ? other.getCheckout_time() == null : this.getCheckout_time().equals(other.getCheckout_time()))
+            && (this.getPay_method() == null ? other.getPay_method() == null : this.getPay_method().equals(other.getPay_method()))
+            && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
+            && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
+            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+            && (this.getUser_name() == null ? other.getUser_name() == null : this.getUser_name().equals(other.getUser_name()))
+            && (this.getConsignee() == null ? other.getConsignee() == null : this.getConsignee().equals(other.getConsignee()));
     }
 
-    /**
-    * 订单号
-    */
-    private void setNumber(String number){
-    this.number = number;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getNumber() == null) ? 0 : getNumber().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getUser_id() == null) ? 0 : getUser_id().hashCode());
+        result = prime * result + ((getAddress_book_id() == null) ? 0 : getAddress_book_id().hashCode());
+        result = prime * result + ((getOrder_time() == null) ? 0 : getOrder_time().hashCode());
+        result = prime * result + ((getCheckout_time() == null) ? 0 : getCheckout_time().hashCode());
+        result = prime * result + ((getPay_method() == null) ? 0 : getPay_method().hashCode());
+        result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
+        result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
+        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
+        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
+        result = prime * result + ((getUser_name() == null) ? 0 : getUser_name().hashCode());
+        result = prime * result + ((getConsignee() == null) ? 0 : getConsignee().hashCode());
+        return result;
     }
 
-    /**
-    * 订单状态 1待付款，2待派送，3已派送，4已完成，5已取消
-    */
-    private void setStatus(Integer status){
-    this.status = status;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", number=").append(number);
+        sb.append(", status=").append(status);
+        sb.append(", user_id=").append(user_id);
+        sb.append(", address_book_id=").append(address_book_id);
+        sb.append(", order_time=").append(order_time);
+        sb.append(", checkout_time=").append(checkout_time);
+        sb.append(", pay_method=").append(pay_method);
+        sb.append(", amount=").append(amount);
+        sb.append(", remark=").append(remark);
+        sb.append(", phone=").append(phone);
+        sb.append(", address=").append(address);
+        sb.append(", user_name=").append(user_name);
+        sb.append(", consignee=").append(consignee);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
-
-    /**
-    * 下单用户
-    */
-    private void setUserId(Long userId){
-    this.userId = userId;
-    }
-
-    /**
-    * 地址id
-    */
-    private void setAddressBookId(Long addressBookId){
-    this.addressBookId = addressBookId;
-    }
-
-    /**
-    * 下单时间
-    */
-    private void setOrderTime(LocalDateTime orderTime){
-    this.orderTime = orderTime;
-    }
-
-    /**
-    * 结账时间
-    */
-    private void setCheckoutTime(LocalDateTime checkoutTime){
-    this.checkoutTime = checkoutTime;
-    }
-
-    /**
-    * 支付方式 1微信,2支付宝
-    */
-    private void setPayMethod(Integer payMethod){
-    this.payMethod = payMethod;
-    }
-
-    /**
-    * 实收金额
-    */
-    private void setAmount(BigDecimal amount){
-    this.amount = amount;
-    }
-
-    /**
-    * 备注
-    */
-    private void setRemark(String remark){
-    this.remark = remark;
-    }
-
-    /**
-    * 
-    */
-    private void setPhone(String phone){
-    this.phone = phone;
-    }
-
-    /**
-    * 
-    */
-    private void setAddress(String address){
-    this.address = address;
-    }
-
-    /**
-    * 
-    */
-    private void setUserName(String userName){
-    this.userName = userName;
-    }
-
-    /**
-    * 
-    */
-    private void setConsignee(String consignee){
-    this.consignee = consignee;
-    }
-
-
-    /**
-    * 主键
-    */
-    private Long getId(){
-    return this.id;
-    }
-
-    /**
-    * 订单号
-    */
-    private String getNumber(){
-    return this.number;
-    }
-
-    /**
-    * 订单状态 1待付款，2待派送，3已派送，4已完成，5已取消
-    */
-    private Integer getStatus(){
-    return this.status;
-    }
-
-    /**
-    * 下单用户
-    */
-    private Long getUserId(){
-    return this.userId;
-    }
-
-    /**
-    * 地址id
-    */
-    private Long getAddressBookId(){
-    return this.addressBookId;
-    }
-
-    /**
-    * 下单时间
-    */
-    private LocalDateTime getOrderTime(){
-    return this.orderTime;
-    }
-
-    /**
-    * 结账时间
-    */
-    private LocalDateTime getCheckoutTime(){
-    return this.checkoutTime;
-    }
-
-    /**
-    * 支付方式 1微信,2支付宝
-    */
-    private Integer getPayMethod(){
-    return this.payMethod;
-    }
-
-    /**
-    * 实收金额
-    */
-    private BigDecimal getAmount(){
-    return this.amount;
-    }
-
-    /**
-    * 备注
-    */
-    private String getRemark(){
-    return this.remark;
-    }
-
-    /**
-    * 
-    */
-    private String getPhone(){
-    return this.phone;
-    }
-
-    /**
-    * 
-    */
-    private String getAddress(){
-    return this.address;
-    }
-
-    /**
-    * 
-    */
-    private String getUserName(){
-    return this.userName;
-    }
-
-    /**
-    * 
-    */
-    private String getConsignee(){
-    return this.consignee;
-    }
-
 }

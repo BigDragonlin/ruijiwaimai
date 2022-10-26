@@ -2,6 +2,7 @@ package com.furuitakeout.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.furuitakeout.common.R;
+import com.furuitakeout.domain.Category;
 import com.furuitakeout.service.impl.CategoryServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;

@@ -1,6 +1,7 @@
 package com.furuitakeout.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.furuitakeout.domain.AddressBook;
 import com.furuitakeout.service.AddressBookService;
 import com.furuitakeout.mapper.AddressBookMapper;
 import org.springframework.stereotype.Service;

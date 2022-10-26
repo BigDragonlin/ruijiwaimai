@@ -1,204 +1,133 @@
 package com.furuitakeout.domain;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Length;
+import lombok.Data;
 
 /**
-* 菜品口味关系表
-* @TableName dish_flavor
-*/
+ * 菜品口味关系表
+ * @TableName dish_flavor
+ */
+@TableName(value ="dish_flavor")
+@Data
 public class DishFlavor implements Serializable {
-
     /**
-    * 主键
-    */
-    @NotNull(message="[主键]不能为空")
-    @ApiModelProperty("主键")
+     * 主键
+     */
+    @TableId(value = "id",type = IdType.AUTO)
     private Long id;
+
     /**
-    * 菜品
-    */
-    @NotNull(message="[菜品]不能为空")
-    @ApiModelProperty("菜品")
-    private Long dishId;
+     * 菜品
+     */
+    @TableField(value = "dish_id")
+    private Long dish_id;
+
     /**
-    * 口味名称
-    */
-    @NotBlank(message="[口味名称]不能为空")
-    @Size(max= 64,message="编码长度不能超过64")
-    @ApiModelProperty("口味名称")
-    @Length(max= 64,message="编码长度不能超过64")
+     * 口味名称
+     */
+    @TableField(value = "name")
     private String name;
+
     /**
-    * 口味数据list
-    */
-    @Size(max= 500,message="编码长度不能超过500")
-    @ApiModelProperty("口味数据list")
-    @Length(max= 500,message="编码长度不能超过500")
+     * 口味数据list
+     */
+    @TableField(value = "value")
     private String value;
-    /**
-    * 创建时间
-    */
-    @NotNull(message="[创建时间]不能为空")
-    @ApiModelProperty("创建时间")
-    private LocalDateTime createTime;
-    /**
-    * 更新时间
-    */
-    @NotNull(message="[更新时间]不能为空")
-    @ApiModelProperty("更新时间")
-    private LocalDateTime updateTime;
-    /**
-    * 创建人
-    */
-    @NotNull(message="[创建人]不能为空")
-    @ApiModelProperty("创建人")
-    private Long createUser;
-    /**
-    * 修改人
-    */
-    @NotNull(message="[修改人]不能为空")
-    @ApiModelProperty("修改人")
-    private Long updateUser;
-    /**
-    * 是否删除
-    */
-    @NotNull(message="[是否删除]不能为空")
-    @ApiModelProperty("是否删除")
-    private Integer isDeleted;
 
     /**
-    * 主键
-    */
-    private void setId(Long id){
-    this.id = id;
+     * 创建时间
+     */
+    @TableField(value = "create_time")
+    private LocalDateTime create_time;
+
+    /**
+     * 更新时间
+     */
+    @TableField(value = "update_time")
+    private LocalDateTime update_time;
+
+    /**
+     * 创建人
+     */
+    @TableField(value = "create_user")
+    private Long create_user;
+
+    /**
+     * 修改人
+     */
+    @TableField(value = "update_user")
+    private Long update_user;
+
+    /**
+     * 是否删除
+     */
+    @TableField(value = "is_deleted")
+    private Integer is_deleted;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        DishFlavor other = (DishFlavor) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getDish_id() == null ? other.getDish_id() == null : this.getDish_id().equals(other.getDish_id()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getValue() == null ? other.getValue() == null : this.getValue().equals(other.getValue()))
+            && (this.getCreate_time() == null ? other.getCreate_time() == null : this.getCreate_time().equals(other.getCreate_time()))
+            && (this.getUpdate_time() == null ? other.getUpdate_time() == null : this.getUpdate_time().equals(other.getUpdate_time()))
+            && (this.getCreate_user() == null ? other.getCreate_user() == null : this.getCreate_user().equals(other.getCreate_user()))
+            && (this.getUpdate_user() == null ? other.getUpdate_user() == null : this.getUpdate_user().equals(other.getUpdate_user()))
+            && (this.getIs_deleted() == null ? other.getIs_deleted() == null : this.getIs_deleted().equals(other.getIs_deleted()));
     }
 
-    /**
-    * 菜品
-    */
-    private void setDishId(Long dishId){
-    this.dishId = dishId;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getDish_id() == null) ? 0 : getDish_id().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getValue() == null) ? 0 : getValue().hashCode());
+        result = prime * result + ((getCreate_time() == null) ? 0 : getCreate_time().hashCode());
+        result = prime * result + ((getUpdate_time() == null) ? 0 : getUpdate_time().hashCode());
+        result = prime * result + ((getCreate_user() == null) ? 0 : getCreate_user().hashCode());
+        result = prime * result + ((getUpdate_user() == null) ? 0 : getUpdate_user().hashCode());
+        result = prime * result + ((getIs_deleted() == null) ? 0 : getIs_deleted().hashCode());
+        return result;
     }
 
-    /**
-    * 口味名称
-    */
-    private void setName(String name){
-    this.name = name;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", dish_id=").append(dish_id);
+        sb.append(", name=").append(name);
+        sb.append(", value=").append(value);
+        sb.append(", create_time=").append(create_time);
+        sb.append(", update_time=").append(update_time);
+        sb.append(", create_user=").append(create_user);
+        sb.append(", update_user=").append(update_user);
+        sb.append(", is_deleted=").append(is_deleted);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
-
-    /**
-    * 口味数据list
-    */
-    private void setValue(String value){
-    this.value = value;
-    }
-
-    /**
-    * 创建时间
-    */
-    private void setCreateTime(LocalDateTime createTime){
-    this.createTime = createTime;
-    }
-
-    /**
-    * 更新时间
-    */
-    private void setUpdateTime(LocalDateTime updateTime){
-    this.updateTime = updateTime;
-    }
-
-    /**
-    * 创建人
-    */
-    private void setCreateUser(Long createUser){
-    this.createUser = createUser;
-    }
-
-    /**
-    * 修改人
-    */
-    private void setUpdateUser(Long updateUser){
-    this.updateUser = updateUser;
-    }
-
-    /**
-    * 是否删除
-    */
-    private void setIsDeleted(Integer isDeleted){
-    this.isDeleted = isDeleted;
-    }
-
-
-    /**
-    * 主键
-    */
-    private Long getId(){
-    return this.id;
-    }
-
-    /**
-    * 菜品
-    */
-    private Long getDishId(){
-    return this.dishId;
-    }
-
-    /**
-    * 口味名称
-    */
-    private String getName(){
-    return this.name;
-    }
-
-    /**
-    * 口味数据list
-    */
-    private String getValue(){
-    return this.value;
-    }
-
-    /**
-    * 创建时间
-    */
-    private LocalDateTime getCreateTime(){
-    return this.createTime;
-    }
-
-    /**
-    * 更新时间
-    */
-    private LocalDateTime getUpdateTime(){
-    return this.updateTime;
-    }
-
-    /**
-    * 创建人
-    */
-    private Long getCreateUser(){
-    return this.createUser;
-    }
-
-    /**
-    * 修改人
-    */
-    private Long getUpdateUser(){
-    return this.updateUser;
-    }
-
-    /**
-    * 是否删除
-    */
-    private Integer getIsDeleted(){
-    return this.isDeleted;
-    }
-
 }

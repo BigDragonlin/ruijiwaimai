@@ -1,6 +1,7 @@
 package com.furuitakeout.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.furuitakeout.domain.Setmeal;
 import com.furuitakeout.service.SetmealService;
 import com.furuitakeout.mapper.SetmealMapper;
 import org.springframework.stereotype.Service;

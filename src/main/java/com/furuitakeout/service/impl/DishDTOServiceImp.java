@@ -1,6 +1,7 @@
 package com.furuitakeout.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.furuitakeout.domain.DishFlavor;
 import com.furuitakeout.dto.DishDTO;
 import com.furuitakeout.mapper.DishDTOMapper;
 import com.furuitakeout.service.DishDTOService;
