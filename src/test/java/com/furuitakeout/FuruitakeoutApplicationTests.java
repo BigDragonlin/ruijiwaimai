@@ -1,6 +1,5 @@
 package com.furuitakeout;
 
-import com.furuitakeout.domain.Employee;
 import com.furuitakeout.service.impl.EmployeeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

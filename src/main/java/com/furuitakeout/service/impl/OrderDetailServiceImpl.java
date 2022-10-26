@@ -1,7 +1,6 @@
 package com.furuitakeout.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.furuitakeout.domain.OrderDetail;
 import com.furuitakeout.service.OrderDetailService;
 import com.furuitakeout.mapper.OrderDetailMapper;
 import org.springframework.stereotype.Service;

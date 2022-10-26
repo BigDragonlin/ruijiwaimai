@@ -1,6 +1,5 @@
 package com.furuitakeout.mapper;
 
-import com.furuitakeout.domain.AddressBook;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

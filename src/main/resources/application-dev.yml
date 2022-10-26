@@ -8,11 +8,14 @@ spring:
 
 mybatis-plus:
   configuration:
-#    在映射实体或者属性的时候，把下划线写法变成驼峰写法
+    #    在映射实体或者属性的时候，把下划线写法变成驼峰写法
     map-underscore-to-camel-case: true
-    #??
+    #启用mybatis的日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   #??
   global-config:
     db-config:
       id-type: auto
+
+reggie:
+  path: C:\Users\Administrator\Desktop\reggie\

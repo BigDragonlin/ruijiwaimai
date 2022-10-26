@@ -1,6 +1,5 @@
 package com.furuitakeout.mapper;
 
-import com.furuitakeout.domain.SetmealDish;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

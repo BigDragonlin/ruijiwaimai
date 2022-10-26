@@ -1,6 +1,5 @@
 package com.furuitakeout.service;
 
-import com.furuitakeout.domain.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CategoryService extends IService<Category> {
 
+    void remove(Long id);
 }

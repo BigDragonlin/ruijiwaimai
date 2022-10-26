@@ -1,6 +1,5 @@
 package com.furuitakeout.service;
 
-import com.furuitakeout.domain.SetmealDish;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

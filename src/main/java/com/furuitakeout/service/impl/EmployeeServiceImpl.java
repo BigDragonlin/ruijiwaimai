@@ -1,7 +1,6 @@
 package com.furuitakeout.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.furuitakeout.domain.Employee;
 import com.furuitakeout.service.EmployeeService;
 import com.furuitakeout.mapper.EmployeeMapper;
 import org.springframework.stereotype.Service;

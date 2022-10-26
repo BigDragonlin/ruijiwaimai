@@ -1,6 +1,5 @@
 package com.furuitakeout.mapper;
 
-import com.furuitakeout.domain.Employee;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

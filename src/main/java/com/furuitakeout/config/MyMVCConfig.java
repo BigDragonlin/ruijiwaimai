@@ -27,7 +27,12 @@ public class MyMVCConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyHandlerInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/employee/login")
-                .excludePathPatterns("/employee/logout");
+                .excludePathPatterns(
+                        "/employee/login",
+                        "/employee/logout",
+                        "/backend/**",
+                        "/front/**"
+                );
+
     }
 }

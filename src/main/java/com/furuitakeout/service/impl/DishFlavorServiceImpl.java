@@ -1,7 +1,6 @@
 package com.furuitakeout.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.furuitakeout.domain.DishFlavor;
 import com.furuitakeout.service.DishFlavorService;
 import com.furuitakeout.mapper.DishFlavorMapper;
 import org.springframework.stereotype.Service;

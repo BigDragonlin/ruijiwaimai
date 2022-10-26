@@ -1,6 +1,5 @@
 package com.furuitakeout.service;
 
-import com.furuitakeout.domain.Dish;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
