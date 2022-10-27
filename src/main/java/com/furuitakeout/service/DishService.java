@@ -2,6 +2,7 @@ package com.furuitakeout.service;
 
 import com.furuitakeout.domain.Dish;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.furuitakeout.dto.DishDto;
 
 /**
 * @author Administrator
@@ -9,5 +10,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-10-22 04:11:02
 */
 public interface DishService extends IService<Dish> {
+    void saveWithFlavors(DishDto dishDto);
 
+    void updateWithFlavors(DishDto dishDto);
 }

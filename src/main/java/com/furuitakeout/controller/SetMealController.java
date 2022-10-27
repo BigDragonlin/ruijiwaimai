@@ -28,7 +28,7 @@ public class SetMealController {
         final Page<Setmeal> pageInfo = new Page<Setmeal>(page, pageSize);
         log.info("套餐页page:{},pageSize:{}", page, pageSize);
         final LambdaQueryWrapper<Setmeal> dishLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        dishLambdaQueryWrapper.orderByAsc(Setmeal::getUpdate_time);
+        dishLambdaQueryWrapper.orderByAsc(Setmeal::getUpdateTime);
         setmealService.page(pageInfo, dishLambdaQueryWrapper);
         return R.success(pageInfo);
     }

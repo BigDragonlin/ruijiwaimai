@@ -36,14 +36,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category>
     public void remove(Long id) {
         log.info("重写CategoryServiceImpl remove，id={}",id);
         final LambdaQueryWrapper<Dish> dishLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        dishLambdaQueryWrapper.eq(Dish::getCategory_id,id);
+        dishLambdaQueryWrapper.eq(Dish::getCategoryId,id);
         final List<Dish> list = dishService.list(dishLambdaQueryWrapper);
         if (list.size()>0){
             throw new CustomerException("种类中包含菜品");
         }
 
         final LambdaQueryWrapper<Setmeal> setmealLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        setmealLambdaQueryWrapper.eq(Setmeal::getCategory_id,id);
+        setmealLambdaQueryWrapper.eq(Setmeal::getCategoryId,id);
         final List<Setmeal> list1 = setmealService.list(setmealLambdaQueryWrapper);
         if (list1.size()>0){
             throw new CustomerException("种类中包含套餐");

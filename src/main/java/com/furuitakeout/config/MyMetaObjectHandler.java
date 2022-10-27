@@ -18,19 +18,22 @@ import java.time.LocalDateTime;
 public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
-        log.info("in MyMetaObjectHandler insertFill .......");
-        this.fillStrategy(metaObject, "create_time", LocalDateTime.now());
-        this.fillStrategy(metaObject, "update_time", LocalDateTime.now());
-        this.fillStrategy(metaObject, "password", "123456");
-        this.fillStrategy(metaObject,"update_user", MyThreadLocal.getCurrentId());
-        this.fillStrategy(metaObject,"create_user",MyThreadLocal.getCurrentId());
+        log.info("in MyMetaObjectHandler insertFill .......MyThreadLocal:{}",MyThreadLocal.getCurrentId());
+
+        this.fillStrategy(metaObject, "createTime", LocalDateTime.now());
+        this.fillStrategy(metaObject, "updateTime", LocalDateTime.now());
+        this.fillStrategy(metaObject, "passWord", "123456");
+        this.fillStrategy(metaObject,"updateUser", MyThreadLocal.getCurrentId());
+        this.fillStrategy(metaObject,"createUser",MyThreadLocal.getCurrentId());
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("in MyMetaObjectHandler updateFill .......,MyThreadLocal.getCurrentId()++{}",MyThreadLocal.getCurrentId());
+        this.fillStrategy(metaObject, "updateTime", LocalDateTime.now());
         this.fillStrategy(metaObject, "update_time", LocalDateTime.now());
-        this.fillStrategy(metaObject, "update_user", MyThreadLocal.getCurrentId());
+        this.fillStrategy(metaObject, "updateUser", MyThreadLocal.getCurrentId());
+
     }
 }
 

@@ -45,7 +45,7 @@ public class Emp {
         final LambdaQueryWrapper<Employee> employeeLambdaQueryWrapper = new LambdaQueryWrapper<>();
 
         employeeLambdaQueryWrapper.like((!StringUtils.isEmpty(name)),Employee::getName,name);
-        employeeLambdaQueryWrapper.orderByAsc(Employee::getCreate_time);
+        employeeLambdaQueryWrapper.orderByAsc(Employee::getCreateTime);
         employeeService.page(pageInfo, employeeLambdaQueryWrapper);
         log.info("pageInfo==>{}",pageInfo.toString());
 
