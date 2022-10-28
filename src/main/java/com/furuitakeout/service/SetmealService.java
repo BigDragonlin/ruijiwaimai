@@ -2,6 +2,7 @@ package com.furuitakeout.service;
 
 import com.furuitakeout.domain.Setmeal;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.furuitakeout.dto.SetMealDto;
 
 /**
 * @author Administrator
@@ -9,5 +10,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-10-22 04:11:02
 */
 public interface SetmealService extends IService<Setmeal> {
+    Boolean saveWithDishCategory(SetMealDto setMealDto);
 
+    SetMealDto updateSetmealByID(Long id);
+
+    Boolean updateWithCaDi(SetMealDto setMealDto);
 }

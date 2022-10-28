@@ -1,5 +1,6 @@
 package com.furuitakeout.controller;
 
+import cn.hutool.crypto.SecureUtil;
 import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -29,6 +30,7 @@ public class Emp {
     @ResponseBody
     public R<String> addEmployee(@RequestBody Employee employee){
         log.info("要添加的员工信息==》{}",employee.toString());
+        employee.setPassword(SecureUtil.md5("123456"));
         final boolean save = employeeService.save(employee);
         log.info("员工添加{}",save);
         return save?R.success("添加成功"):R.error("添加失败");

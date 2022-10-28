@@ -51,11 +51,13 @@ public class DishFlavor implements Serializable {
     /**
      * 创建人
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long createUser;
 
     /**
      * 修改人
      */
+    @TableField(fill = FieldFill.UPDATE)
     private Long updateUser;
 
     /**

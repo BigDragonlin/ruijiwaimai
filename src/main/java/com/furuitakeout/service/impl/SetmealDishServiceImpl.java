@@ -2,6 +2,7 @@ package com.furuitakeout.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.furuitakeout.domain.SetmealDish;
+import com.furuitakeout.dto.SetMealDto;
 import com.furuitakeout.service.SetmealDishService;
 import com.furuitakeout.mapper.SetmealDishMapper;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SetmealDishServiceImpl extends ServiceImpl<SetmealDishMapper, SetmealDish>
     implements SetmealDishService{
+
 
 }
 

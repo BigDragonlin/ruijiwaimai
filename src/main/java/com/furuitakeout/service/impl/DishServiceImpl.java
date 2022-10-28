@@ -10,6 +10,7 @@ import com.furuitakeout.mapper.DishMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
     DishFlavorServiceImpl dishFlavorService;
 
     @Override
+    @Transactional
     public void saveWithFlavors(DishDto dishDto) {
 
         log.info("存dto+{}",dishDto.toString());
@@ -42,6 +44,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish>
     }
 
     @Override
+    @Transactional
     public void updateWithFlavors(DishDto dishDto) {
         this.updateById(dishDto);
         final LambdaQueryWrapper<DishFlavor> dishFlavorLambdaQueryWrapper = new LambdaQueryWrapper<>();

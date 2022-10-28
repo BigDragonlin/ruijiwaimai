@@ -1,11 +1,17 @@
 package com.furuitakeout.config;
 
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.furuitakeout.common.MyThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import sun.security.provider.MD5;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 
@@ -16,24 +22,23 @@ import java.time.LocalDateTime;
 @Configuration
 @Slf4j
 public class MyMetaObjectHandler implements MetaObjectHandler {
+    @Autowired
+    HttpSession httpSession;
+
     @Override
     public void insertFill(MetaObject metaObject) {
-        log.info("in MyMetaObjectHandler insertFill .......MyThreadLocal:{}",MyThreadLocal.getCurrentId());
+        metaObject.setValue("createTime", LocalDateTime.now());
+        metaObject.setValue("updateTime",LocalDateTime.now());
 
-        this.fillStrategy(metaObject, "createTime", LocalDateTime.now());
-        this.fillStrategy(metaObject, "updateTime", LocalDateTime.now());
-        this.fillStrategy(metaObject, "passWord", "123456");
-        this.fillStrategy(metaObject,"updateUser", MyThreadLocal.getCurrentId());
-        this.fillStrategy(metaObject,"createUser",MyThreadLocal.getCurrentId());
+        metaObject.setValue("createUser", httpSession.getAttribute("loginID"));  //这里的id是不能直接获取的，所以这里先写死，后面教你怎么动态获取员工id
+        metaObject.setValue("updateUser",httpSession.getAttribute("loginID"));
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        log.info("in MyMetaObjectHandler updateFill .......,MyThreadLocal.getCurrentId()++{}",MyThreadLocal.getCurrentId());
-        this.fillStrategy(metaObject, "updateTime", LocalDateTime.now());
-        this.fillStrategy(metaObject, "update_time", LocalDateTime.now());
-        this.fillStrategy(metaObject, "updateUser", MyThreadLocal.getCurrentId());
-
+        log.info("进入到MyMetaObjectHandler updateFill");
+        metaObject.setValue("updateTime",LocalDateTime.now());
+        metaObject.setValue("updateUser",httpSession.getAttribute("loginID"));
     }
 }
 

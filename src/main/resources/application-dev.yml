@@ -12,7 +12,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     #启用mybatis的日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  #??
+  #全集自动id自动配置
   global-config:
     db-config:
       id-type: auto
