@@ -25,13 +25,15 @@ public class MyMVCConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        log.info("进入到interceptor中来");
         registry.addInterceptor(new MyHandlerInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns(
                         "/employee/login",
                         "/employee/logout",
                         "/backend/**",
-                        "/front/**"
+                        "/front/**",
+                        "/user/sendMsg"
                 );
 
     }

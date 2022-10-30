@@ -1,5 +1,6 @@
-package com.furuitakeout.common;
+package com.furuitakeout.common.myException;
 
+import com.furuitakeout.common.R;
 import com.furuitakeout.common.myException.CustomerException;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;

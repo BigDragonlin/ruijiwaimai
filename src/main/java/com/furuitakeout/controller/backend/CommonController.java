@@ -1,4 +1,4 @@
-package com.furuitakeout.controller;
+package com.furuitakeout.controller.backend;
 
 import com.furuitakeout.common.R;
 import io.swagger.annotations.Api;

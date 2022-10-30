@@ -1,4 +1,4 @@
-package com.furuitakeout.controller;
+package com.furuitakeout.controller.backend;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.furuitakeout.common.R;
