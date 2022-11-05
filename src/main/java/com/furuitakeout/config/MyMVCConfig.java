@@ -33,7 +33,8 @@ public class MyMVCConfig implements WebMvcConfigurer {
                         "/employee/logout",
                         "/backend/**",
                         "/front/**",
-                        "/user/sendMsg"
+                        "/user/sendMsg",
+                        "/user/login"
                 );
 
     }

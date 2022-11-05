@@ -11,10 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 public class MyHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        final long id = Thread.currentThread().getId();
-        log.info("MyHandlerInterceptor threadid：{}",id);
-        //MyHandlerInterceptor threadid：502
-
         final Object loginFlag = request.getSession().getAttribute("loginFlag");
         final String requestURI = request.getRequestURI();
         log.info("正在访问的url网址是：{}",requestURI);
