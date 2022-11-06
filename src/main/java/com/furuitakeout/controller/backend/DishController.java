@@ -8,6 +8,7 @@ import com.furuitakeout.domain.Dish;
 import com.furuitakeout.domain.DishFlavor;
 import com.furuitakeout.dto.DishDto;
 import com.furuitakeout.mapper.DishDtoMapper;
+import com.furuitakeout.service.CategoryService;
 import com.furuitakeout.service.impl.CategoryServiceImpl;
 import com.furuitakeout.service.impl.DishDtoServiceImp;
 import com.furuitakeout.service.impl.DishFlavorServiceImpl;
@@ -87,14 +88,47 @@ public class DishController {
         return R.success("删除成功");
     }
 
-    @ApiParam("展现添加菜品中的菜品分类")
+    @ApiParam("展现添加菜品中的菜品分类,展现")
     @GetMapping("/category/list")
-    R<List<Category>> listCategory(Integer type) {
-        log.info("展现添加菜品中的菜品分类::{}", type);
-        final LambdaQueryWrapper<Category> categoryLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        categoryLambdaQueryWrapper.eq(Category::getType, type).orderByAsc(Category::getUpdateTime);
-        final List<Category> list = categoryService.list(categoryLambdaQueryWrapper);
-        return R.success(list);
+    R<List<DishDto>> listCategory(Dish dish) {
+        //这里可以传categoryId,但是为了代码通用性更强,这里直接使用dish类来接受（因为dish里面是有categoryId的）,以后传dish的其他属性这里也可以使用
+        //构造查询条件
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(dish.getCategoryId() != null ,Dish::getCategoryId,dish.getCategoryId());
+        //添加条件，查询状态为1（起售状态）的菜品
+        queryWrapper.eq(Dish::getStatus,1);
+
+        //添加排序条件
+        queryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+        List<Dish> list = dishService.list(queryWrapper);
+
+        //进行集合的泛型转化
+        List<DishDto> dishDtoList = list.stream().map((item) ->{
+            DishDto dishDto = new DishDto();
+            //为一个新的对象赋值，一定要考虑你为它赋过几个值，否则你自己都不知道就返回了null的数据
+            //为dishDto对象的基本属性拷贝
+            BeanUtils.copyProperties(item,dishDto);
+            Long categoryId = item.getCategoryId();
+            Category category = categoryService.getById(categoryId);
+            if (category != null){
+                String categoryName = category.getName();
+                dishDto.setCategoryName(categoryName);
+            }
+            //为dishdto赋值flavors属性
+            //当前菜品的id
+            Long dishId = item.getId();
+            //创建条件查询对象
+            LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper = new LambdaQueryWrapper();
+            lambdaQueryWrapper.eq(DishFlavor::getDishId,dishId);
+            //select * from dish_flavor where dish_id = ?
+            //这里之所以使用list来条件查询那是因为同一个dish_id 可以查出不同的口味出来,就是查询的结果不止一个
+            List<DishFlavor> dishFlavorList = dishFlavorService.list(lambdaQueryWrapper);
+            dishDto.setFlavors(dishFlavorList);
+
+            return dishDto;
+        }).collect(Collectors.toList());
+
+        return R.success(dishDtoList);
     }
 
     @ApiParam("添加菜品")
