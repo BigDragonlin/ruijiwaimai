@@ -25,6 +25,5 @@ public class MyHandlerInterceptor implements org.springframework.web.servlet.Han
         }
             log.info("账号验证失败，不可进入");
             return false;
-
     }
 }
